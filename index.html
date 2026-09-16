@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Local signature image editor and JPEG size optimizer">
+  <title>50KB</title>
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/5044/5044958.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <main class="app">
+
+    <!-- Page 1: Uploading -->
+    <section id="uploadView" class="view active">
+      <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="Upload an image">
+        <div class="upload-icon">↑</div>
+        <button id="chooseBtn" class="primary-btn" type="button">Choose image</button>
+        <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp" hidden>
+      </div>
+      <div id="uploadError" class="error" hidden></div>
+    </section>
+
+    <!-- Page 2: Editing -->
+    <section id="editView" class="view">
+      <div class="editor-shell" id="editorShell">
+        <div class="canvas-wrap" id="editorWrap">
+          <canvas id="editorCanvas"></canvas>
+          <div id="selectionBox" class="selection-box" hidden>
+            <span class="handle nw"></span><span class="handle ne"></span>
+            <span class="handle sw"></span><span class="handle se"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontally centered rotate & zoom tools -->
+      <div class="toolbar">
+        <button id="rotateLeft" class="tool-btn" type="button">↶ Rotate Left</button>
+        <button id="rotateRight" class="tool-btn" type="button">Rotate Right ↷</button>
+        <button id="zoomOutBtn" class="tool-btn" type="button">🔍− Zoom Out</button>
+        <button id="zoomInBtn" class="tool-btn" type="button">🔍+ Zoom In</button>
+      </div>
+
+      <!-- Uniform Sticky Bottom Navigation (Page 2) -->
+      <footer class="sticky-bottom-bar">
+        <button id="page2BackBtn" class="ghost-btn" type="button">← Back</button>
+        <button id="nextBtn" class="primary-btn" type="button">Next →</button>
+      </footer>
+    </section>
+
+    <!-- Page 3: Output / Download -->
+    <section id="resultView" class="view">
+      <div class="result-grid">
+        <div class="preview-card">
+          <div id="resultPreview" class="result-preview checkerboard">
+            <canvas id="resultCanvas"></canvas>
+          </div>
+        </div>
+
+        <div class="settings-card">
+          <label for="maxKb">Maximum file size</label>
+          <div class="kb-input">
+            <input id="maxKb" type="number" min="1" step="1" value="50">
+            <span>KB</span>
+          </div>
+
+          <button id="donotRemoveBg" class="tool-btn full" type="button">Don't Remove BG</button>
+          <button id="processAndDownloadBtn" class="primary-btn full" type="button">Process & Download Image</button>
+        </div>
+      </div>
+
+      <!-- Uniform Sticky Bottom Navigation (Page 3) -->
+      <footer class="sticky-bottom-bar">
+        <button id="page3BackBtn" class="ghost-btn" type="button">← Back</button>
+        <button id="page3ResetBtn" class="ghost-btn" type="button">Start Over</button>
+      </footer>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
